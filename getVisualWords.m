@@ -10,7 +10,7 @@ distances = pdist2(imgResponses,dictionary);
 [minDist,index] = min(distances,[],2);
 
 %word map
-wordMap = vec2mat(index,size(I,2));
-    
+wordMap = reshape(index,[size(I,1) size(I,2)]);
+
 end
 
