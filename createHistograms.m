@@ -3,9 +3,31 @@ function outputHistograms = createHistograms(dictionarySize,imagePaths,wordMapDi
 %imagePaths: a cell array containing paths of the images
 %wordMapDir: directory name which contains all the wordmaps
 
-outputHistograms = []; %create a NumImage x histogram matrix of histograms.
-                      %this variable will store all the histograms of training images
 
-%%%YOUR CODE HERE
+%Parameter
+totalLayers = 3;
+
+%create a NumImage x histogram matrix of histograms.
+%this variable will store all the histograms of training images
+histSize = dictionarySize * ( 4^totalLayers - 1) / 3;
+outputHistograms = zeros(histSize,length(imagePaths));
+
+for i = 1:length(imagePaths)
+   %get image path
+   imagePath = imagePaths{i};
+   %get corresponding .mat file path
+   matPath = strrep(imagePath,'.jpg','.mat');
+   %get .mat file
+   matFile = fullfile(wordMapDir,matPath);
+   %load mat file
+   obj = load(matFile);
+   %get histogram
+   histogram = getImageFeaturesSPM(totalLayers, obj.wordMap, dictionarySize);
+   %concatenate
+   outputHistograms(:,i) = histogram;
+end
+                      
+                      
+
 
 end

@@ -11,14 +11,14 @@ targetDir = '../wordmap';%where we will store visual word outputs
 
 %%compute filter responses and make dictionary
 fprintf('Computing dictionary ... ');
-computeDictionary(trainImagePaths,imageDir);
+%computeDictionary(trainImagePaths,imageDir);
 load('dictionary.mat','dictionary','filterBank');
 fprintf('done\n');
 
 %%now compute visual words for each image
-numCores = 2; %number of parallel jobs to run. Laptops may not support higher numbers
+numCores = 4; %number of parallel jobs to run. Laptops may not support higher numbers
 fprintf('Computing visual words ... ');
-batchToVisualWords(trainImagePaths,classnames,filterBank,dictionary,imageDir,targetDir,numCores);
+%batchToVisualWords(trainImagePaths,classnames,filterBank,dictionary,imageDir,targetDir,numCores);
 fprintf('done\n');
 
 %%now compute histograms for all training images using visual word files
@@ -32,4 +32,4 @@ load(trainingHistogramsFile,'trainHistograms');
 
 
 %%the test code just needs to load trainOutput.mat, so lets store it
-save('trainOutput.mat','dictionary','filterBank','trainHistograms','trainImageLabels');
+save('trainOutput.mat','dictionary','filterBank','trainHistograms','trainImageLabels','classnames');

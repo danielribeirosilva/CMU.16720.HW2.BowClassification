@@ -16,8 +16,8 @@ cellWidth = size(wordMap,2) / 2^l;
 layerHistogram = zeros(1,K*(4^l));
 oldHistograms = cell(2^l,2^l);
 
-for i=1:round(2^l)
-    for j=1:round(2^l)
+for i=1:int16(2^l)
+    for j=1:int16(2^l)
         %get corresponding cell word map
         currentWordMap = wordMap((i-1)*cellHeight+1:i*cellHeight,(j-1)*cellWidth+1:j*cellWidth);
         
@@ -53,8 +53,8 @@ while l >= 0
     
     layerHistogram = zeros(1,dictionarySize*(4^l));
     newHistograms = cell(2^l,2^l);
-    for i=1:fix(2^l)
-        for j=1:fix(2^l)
+    for i=1:int16(2^l)
+        for j=1:int16(2^l)
             %combine histograms from finer cells
             newHistograms{i,j} = oldHistograms{2*i-1,2*j-1} + ...
                                  oldHistograms{2*i,2*j-1}   + ...
