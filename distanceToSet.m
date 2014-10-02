@@ -4,9 +4,6 @@ function [histInter] = distanceToSet(wordHist, histograms)
         wordHist = wordHist';
     end
 
-    disp(size(wordHist));
-    disp(size(histograms));
-
     histInter = sum(bsxfun(@min,wordHist,histograms));
 
 end
